@@ -9,6 +9,7 @@ const userSchema = new Schema({
     address: { type: String, required: true, trim: true },
     nationalId: { type: String, required: true, trim: true },
     phone: { type: String, required: true, trim: true },
+    isAdmin: {type: Boolean, default: false},
 });
 
 userSchema.pre("save", async function(next){

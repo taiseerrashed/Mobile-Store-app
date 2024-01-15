@@ -5,6 +5,7 @@ require("dotenv").config()
 const mongoose = require('mongoose')
 const routes = require("./routes/index.route")
 const morgan = require('morgan')
+const cookieParser = require("cookie-parser")
 
 // Database connection
 function dbConnection(){
@@ -22,6 +23,7 @@ function dbConnection(){
 
 app.use(morgan("dev"))
 app.use(express.json())
+app.use(cookieParser())
 app.use("/api",routes)
 
 app.all("*" , (req,res)=>{
