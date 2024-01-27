@@ -24,6 +24,9 @@ module.exports = {
         phone: Joi.string().regex(/^01\d{9}$/).required().messages({
             "string.required": "Phone is required"
         }),
+        store: Joi.string().required().messages({
+            "string.required": "Store is required"
+        }),
     }),
     loginSchema: Joi.object().keys({
         email: Joi.string().email().min(3).max(30).required().messages({

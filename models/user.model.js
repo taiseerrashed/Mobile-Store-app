@@ -10,6 +10,7 @@ const userSchema = new Schema({
     nationalId: { type: String, required: true, trim: true },
     phone: { type: String, required: true, trim: true },
     isAdmin: {type: Boolean, default: false},
+    store: { type: mongoose.Types.ObjectId, required: true, ref: "Store" }
 });
 
 userSchema.pre("save", async function(next){
@@ -17,6 +18,9 @@ userSchema.pre("save", async function(next){
         let user = this;
         if(!user.isModified("password")){
             return next();
+        }
+        if(!mongoose.isValidObjectId(user.store)){
+            return next("Invalid object id for store");
         }
         let hashedPassword = await bcrypt.hash(user.password , 8);
         user.password = hashedPassword; 

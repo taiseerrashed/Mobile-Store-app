@@ -7,7 +7,7 @@ const authenticate = asyncHandler(async(req,res,next)=>{
     if(!token){
        return res.status(401).send({message: "Token is required !"});
     }
-    token = token.split(" ")[1];
+    token = token?.split(" ")[1];
 
     let secretKey = process.env.SECRET_TOKEN;
     let decode = jwt.verify(token, secretKey);
